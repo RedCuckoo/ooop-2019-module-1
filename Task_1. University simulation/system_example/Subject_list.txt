@@ -1,0 +1,11 @@
+Discrete mathematics
+Analytical geometry
+Linear algebra
+Abstract algebra
+Bases of programming
+Bases of object-oriented programming
+Object-oriented programming
+Possibility theory
+Algorithms and complexity
+Mathematical analysis
+Differential equations

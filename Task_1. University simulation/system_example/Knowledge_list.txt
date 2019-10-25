@@ -1,0 +1,18 @@
+﻿Bases of object-oriented programming
+Object-oriented programming
+Algorithms
+Data structures
+Combinatorics
+Differentiation
+Integration
+Taking a derivative
+Findind area of two-dimentional figures
+Finding area of three-dimentional figures
+Finding volumes
+Finding roots of square equation
+Finding roots of cubic equation
+Finding roots of a polynomial
+Multiplication of matrixes
+Calculation a determinant of the matrix
+Finding characteristic value
+Solving a differential equation
