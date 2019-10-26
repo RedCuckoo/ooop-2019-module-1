@@ -1,4 +1,4 @@
-﻿Bases of object-oriented programming
+Bases of object-oriented programming
 Object-oriented programming
 Algorithms
 Data structures
