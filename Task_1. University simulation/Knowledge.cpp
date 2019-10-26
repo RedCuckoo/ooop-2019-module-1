@@ -27,6 +27,19 @@ Knowledge Knowledge::operator++(int) {
 	return ans;
 }
 
+Knowledge& Knowledge::operator+=(size_t to_add) {
+	level += to_add;
+	return *this;
+}
+
+/*!
+	\brief Less than
+	\details Overloaded less than operator, to compare it with other objects from this class
+*/
+bool Knowledge::operator<(const Knowledge& to_compare) {
+	return (level < to_compare.level) ? true : false;
+}
+
 /*!
 	\brief Getter for the level (field of Knowledge)
 */

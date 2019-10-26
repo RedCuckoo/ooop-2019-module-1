@@ -14,9 +14,10 @@
 */
 class Knowledge
 {
+private:
 	///name of the knowledge
 	std::string name;
-	///level of the knowledge
+	///level of the knowledge, maximum is 10, minimum is 0
 	size_t level;
 
 	friend  std::ostream& operator<<(std::ostream&, const Knowledge&);
@@ -24,6 +25,8 @@ public:
 	Knowledge(std::string name_of_knowledge, size_t level_of_knowledge = 0) : name(name_of_knowledge), level(level_of_knowledge){	}
 	Knowledge& operator++();
 	Knowledge operator++(int);
+	Knowledge& operator+= (size_t);	
+	bool operator<(const Knowledge&);
 	size_t get_level();
 };
 
