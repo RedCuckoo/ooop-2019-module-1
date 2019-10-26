@@ -14,6 +14,8 @@
 */
 Knowledge& Knowledge::operator++() {
 	++level;
+	if (level > 10)
+		level = 10;
 	return *this;
 }
 
@@ -24,11 +26,15 @@ Knowledge& Knowledge::operator++() {
 Knowledge Knowledge::operator++(int) {
 	Knowledge ans = *this;
 	++level;
+	if (level > 10)
+		level = 10;
 	return ans;
 }
 
 Knowledge& Knowledge::operator+=(size_t to_add) {
 	level += to_add;
+	if (level > 10)
+		level = 10;
 	return *this;
 }
 
