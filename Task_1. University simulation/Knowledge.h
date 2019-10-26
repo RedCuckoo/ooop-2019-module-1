@@ -22,10 +22,10 @@ private:
 
 	friend  std::ostream& operator<<(std::ostream&, const Knowledge&);
 public:
-	Knowledge(std::string name_of_knowledge, size_t level_of_knowledge = 0) : name(name_of_knowledge), level(level_of_knowledge){	}
+	Knowledge(const std::string& name_of_knowledge, size_t level_of_knowledge = 0) : name(name_of_knowledge), level(level_of_knowledge){	}
 	Knowledge& operator++();
 	Knowledge operator++(int);
-	Knowledge& operator+= (size_t);	
+	Knowledge& operator+= (size_t);
 	bool operator<(const Knowledge&);
 	size_t get_level();
 };

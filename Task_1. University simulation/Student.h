@@ -12,7 +12,7 @@ private:
 	size_t id;
 	std::vector<Knowledge> knowledges;
 public:
-	Student(size_t, std::string, std::string, std::vector<Knowledge>);
+	Student(size_t students_identification, const std::string& students_family_name, const std::string& students_first_name, std::vector<Knowledge> students_set_of_knowledges);
 
 
 };
