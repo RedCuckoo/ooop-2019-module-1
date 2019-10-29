@@ -79,18 +79,18 @@ int predict(const std::list<std::shared_ptr<Base>>& l_obj) {
 int main(){
 	{	
 		std::shared_ptr<Green> g1(new Green);
-		std::shared_ptr<Green> g2(new Green);
-		std::shared_ptr<Red> r1(new Red);
-		std::shared_ptr<Red> r2(new Red);
-		std::shared_ptr<Alpha> a1 (new Alpha);
-		std::shared_ptr<Beta> b1 (new Beta); 
+		//std::shared_ptr<Green> g2(new Green);
+		///std::shared_ptr<Red> r1(new Red);
+		//std::shared_ptr<Red> r2(new Red);
+		//std::shared_ptr<Alpha> a1 (new Alpha);
+		//std::shared_ptr<Beta> b1 (new Beta); 
 
 		std::list<std::shared_ptr<Base>> l_objects;
-		l_objects.push_back(b1);
-		l_objects.push_back(a1);
-		l_objects.push_back(r2);
-		l_objects.push_back(r1);
-		l_objects.push_back(g2);
+		//l_objects.push_back(b1);
+		//l_objects.push_back(a1);
+		//l_objects.push_back(r2);
+		////l_objects.push_back(r1);
+		//l_objects.push_back(g2);
 		l_objects.push_back(g1);
 
 		std::cout << "Predicted value: " <<predict(l_objects);
