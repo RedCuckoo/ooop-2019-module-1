@@ -11,6 +11,8 @@ private:
 	std::vector<Task> task_list;
 public:
 	Subject(const std::string& subject_name, std::vector<Task> subject_task_list);
+	const Task operator[](size_t index) const;
+	size_t size() const;
 };
 
 #endif //SUBJECT_H

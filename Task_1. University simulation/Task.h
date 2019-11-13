@@ -9,33 +9,31 @@
 
 #include <vector>
 #include <string>
-#include "Knowledge.h"
-//#include "Student.h"
 
 class Student;
 
 /*!
 	\brief Class Task
-	\details
+	\details 
 */
 class Task{
 private:
 	std::string name;
 	size_t max_points;
 	size_t complexity = 0;
-	std::vector<Knowledge> required_knowledges;
 	size_t time = 0;
 public:
 	Task() = default;
-	Task(const std::string& task_name, size_t maximum_points, std::vector<Knowledge> minimal_required_knowledges);
+	Task(const std::string& task_name, size_t maximum_points);
 	Task(const Task& to_copy);
 	bool operator<(const Task& to_compare);
 	Task& operator--();
 	Task operator--(int);
+	bool operator==(const Task& to_compare) const;
 	size_t time_left();
 	size_t get_points();
-	std::vector<Knowledge> get_knowledge_list();
-	void calculateTime(Student& to_calc);
+	void calculateTime(Student& to_calc, size_t stud_know);
+	//friend bool operator==(const Task& to_compare_f, const Task& to_compare_s);
 };
 
-#endif // !TASK_H
+#endif //TASK_H

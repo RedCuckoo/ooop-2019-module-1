@@ -6,7 +6,6 @@
 #include "Student.h"
 #include "Task.h"
 #include "Subject.h"
-#include "Knowledge.h"
 
 
 
@@ -15,8 +14,6 @@ private:
 	std::vector<Student> students;
 	std::vector<Subject> subjects;
 	std::vector<Task> tasks;
-	std::vector<Knowledge> knowledges;
-	std::vector<Knowledge> fillRandKnowledge(size_t max_value = 10);
 	std::vector<Task> getRandTaskSubVector();
 	size_t randInt(size_t topVal);
 	size_t time = 0;
@@ -24,7 +21,7 @@ private:
 public:
 	Simulation(const std::string& simulation_folder_name);
 	void run(size_t given_time);
-	std::vector<size_t> generateImproved();
+	std::vector<std::string> generateImproved();
 };
 
 #endif // !SIMULATION_H

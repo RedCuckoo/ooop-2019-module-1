@@ -11,3 +11,11 @@ Subject::Subject(const std::string& subject_name, std::vector<Task> subject_task
 		});
 	task_list = subject_task_list;
 }
+
+const Task Subject::operator[](size_t index) const {
+	return task_list[index];
+}
+
+size_t Subject::size() const{
+	return task_list.size();
+}

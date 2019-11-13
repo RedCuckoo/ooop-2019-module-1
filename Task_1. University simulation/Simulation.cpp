@@ -3,22 +3,22 @@
 #include <fstream>
 #include <algorithm>
 
-/*!
-\brief To fill a container with random integers
-\details The function changed passed container and filling it with random values.
-\param [out] cont A reference to the container which has to be filled, it has to have a working function push(elem) for adding elements
-\param [in] size An amount of elements to be pushed to the container
-*/
-std::vector<Knowledge> Simulation::fillRandKnowledge(size_t max_value) {
-	std::vector<Knowledge> ans;
-
-	for (size_t i = 0, size = knowledges.size(); i < size; ++i)
-		ans.push_back(knowledges[i]);
-	
-	for (size_t i = 0, size = knowledges.size(); i < size; ++i)
-		ans[i] += (randInt(max_value) + 1);
-	return ans;
-}
+///*!
+//\brief To fill a container with random integers
+//\details The function changed passed container and filling it with random values.
+//\param [out] cont A reference to the container which has to be filled, it has to have a working function push(elem) for adding elements
+//\param [in] size An amount of elements to be pushed to the container
+//*/
+//std::vector<Knowledge> Simulation::fillRandKnowledge(size_t max_value) {
+//	std::vector<Knowledge> ans;
+//
+//	for (size_t i = 0, size = knowledges.size(); i < size; ++i)
+//		ans.push_back(knowledges[i]);
+//	
+//	for (size_t i = 0, size = knowledges.size(); i < size; ++i)
+//		ans[i] += (randInt(max_value) + 1);
+//	return ans;
+//}
 
 /*!
 \brief To get a random integer
@@ -49,31 +49,12 @@ std::vector<Task> Simulation::getRandTaskSubVector() {
 }
 
 Simulation::Simulation(const std::string& simulation_folder_name) {
-	std::ifstream input(simulation_folder_name + "/Knowledge_list.txt");
-	std::string temp_string_1, temp_string_2;
-
-	while (input.good()) {
-		std::getline(input, temp_string_1);
-		knowledges.push_back(Knowledge(temp_string_1));
-	}
-
-	input.close();
-
-	input.open(simulation_folder_name + "/Student_list.txt");
-	size_t size = 0;
-
-	while (input.good()) {
-		input >> temp_string_1 >> temp_string_2;
-		students.push_back(Student(size++, temp_string_1, temp_string_2, fillRandKnowledge()));
-	}
-
-	input.close();
-
 	//TODO: explain numbers
-	input.open(simulation_folder_name + "/Task_list.txt");
+	std::string temp_string_1, temp_string_2;
+	std::ifstream input(simulation_folder_name + "/Task_list.txt");
 	while (input.good()) {
 		std::getline(input, temp_string_1);
-		tasks.push_back(Task(temp_string_1, randInt(100), fillRandKnowledge()));
+		tasks.push_back(Task(temp_string_1, randInt(100)));
 	}
 
 	input.close();
@@ -90,6 +71,17 @@ Simulation::Simulation(const std::string& simulation_folder_name) {
 			return (a < b);
 		});
 
+	input.open(simulation_folder_name + "/Student_list.txt");
+
+	size_t size = 0;
+
+	while (input.good()) {
+		input >> temp_string_1 >> temp_string_2;
+		students.push_back(Student(size++, temp_string_1, temp_string_2, subjects, tasks));
+	}
+
+	input.close();
+
 	initial_students = students;
 }
 
@@ -98,23 +90,23 @@ void Simulation::run(size_t given_time) {
 		for (size_t j = 0, size = students.size(); j < size; ++j) {
 			if (!tasks.size())
 				return;
-			students[j].do_task(tasks);
+			students[j].do_task();
 		}
 	}
 }
 
-std::vector<size_t> Simulation::generateImproved() {
+std::vector<std::string> Simulation::generateImproved() {
 	std::vector<std::vector<size_t>> deltaAndCounter;
 	std::vector<size_t> pair;
 	size_t counter = 0;
-	size_t size_of_knowledge = (students.size()) ? students[0].get_knowledge_list().size() : 0;
-	std::vector<Knowledge> current_students_knowledge;
-	std::vector<Knowledge> initial_students_knowledge;
+	size_t size_of_subjects = subjects.size();
+	std::vector<Pair<const Subject*, size_t>> current_students_knowledges;
+	std::vector<Pair<const Subject*, size_t>> initial_students_knowledges;
 	for (size_t i = 0, size_of_students = students.size(); i < size_of_students; ++i) {
-		current_students_knowledge = students[i].get_knowledge_list();
-		initial_students_knowledge = initial_students[i].get_knowledge_list();
-		for (size_t j = 0; j < size_of_knowledge; ++j) {
-			if (initial_students_knowledge[j] < current_students_knowledge[j]) {
+		current_students_knowledges = students[i].get_knowledges_list();
+		initial_students_knowledges = initial_students[i].get_knowledges_list();
+		for (size_t j = 0; j < size_of_subjects; ++j) {
+			if (initial_students_knowledges[j].second_element < current_students_knowledges[j].second_element) {
 				++counter;
 				//pair.push_back(current_students_knowledge[j].get_level() - initial_students_knowledge[j]);
 			}
@@ -131,9 +123,14 @@ std::vector<size_t> Simulation::generateImproved() {
 			return (a[1] < b[1]);
 		});
 
-	std::vector<size_t> ans;
+	std::vector<size_t> ans_temp;
+	std::vector<std::string> ans;
 	for (size_t i = 0, size = deltaAndCounter.size(); i < size; ++i)
-		ans.push_back(deltaAndCounter[i][0]);
+		ans_temp.push_back(deltaAndCounter[i][0]);
+
+	for (size_t i = 0, size = ans_temp.size(); i < size; ++i)
+		ans.push_back(students[ans_temp[i]].getFullName());
+
 
 	return ans;
 }
