@@ -5,7 +5,7 @@
 #include <vector>
 #include "Task.h"
 #include "Subject.h"
-#include "data_structures/Pair.h"
+#include "../../data_structures/Pair.h"
 
 class Student{
 private:

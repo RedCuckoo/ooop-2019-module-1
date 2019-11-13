@@ -3,9 +3,9 @@
 
 #include <vector>
 #include <string>
-#include "Student.h"
-#include "Task.h"
-#include "Subject.h"
+#include "university_structure/Student.h"
+#include "university_structure/Task.h"
+#include "university_structure/Subject.h"
 
 
 

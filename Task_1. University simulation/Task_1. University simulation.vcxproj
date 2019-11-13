@@ -151,18 +151,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Simulation.cpp" />
-    <ClCompile Include="Student.cpp" />
-    <ClCompile Include="Subject.cpp" />
-    <ClCompile Include="Task.cpp" />
     <ClCompile Include="Task_1. University simulation.cpp" />
+    <ClCompile Include="university_simulation\Simulation.cpp" />
+    <ClCompile Include="university_simulation\university_structure\Student.cpp" />
+    <ClCompile Include="university_simulation\university_structure\Subject.cpp" />
+    <ClCompile Include="university_simulation\university_structure\Task.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Pair.h" />
-    <ClInclude Include="Simulation.h" />
-    <ClInclude Include="Student.h" />
-    <ClInclude Include="Subject.h" />
-    <ClInclude Include="Task.h" />
+    <ClInclude Include="data_structures\Pair.h" />
+    <ClInclude Include="university_simulation\Simulation.h" />
+    <ClInclude Include="university_simulation\university_structure\Student.h" />
+    <ClInclude Include="university_simulation\university_structure\Subject.h" />
+    <ClInclude Include="university_simulation\university_structure\Task.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

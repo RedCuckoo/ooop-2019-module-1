@@ -4,19 +4,18 @@
 //Momotenko Yurii
 //K-29
 
-#include <iostream>
-#include <fstream>
-#include <vector>
+#include <random>
 #include <string>
-#include "Knowledge.h"
-#include "Student.h"
-#include "Simulation.h"
 #include <time.h>
+#include "university_simulation/Simulation.h"
 
 int main()
 {
 	srand((size_t)time(0));
 	Simulation systemSimulation("system_example");
 	systemSimulation.run(100);
-	std::vector<size_t> improvedStudents = systemSimulation.generateImproved();
+	std::vector<std::string> improvedStudents = systemSimulation.generateImproved();
+	for (size_t i = 0, size = improvedStudents.size(); i < size; ++i)
+		std::cout << improvedStudents[i] << '\n';
+	return 0;
 }

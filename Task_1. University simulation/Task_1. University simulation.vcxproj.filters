@@ -18,36 +18,33 @@
     <ClCompile Include="Task_1. University simulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Knowledge.cpp">
+    <ClCompile Include="university_simulation\Simulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Task.cpp">
+    <ClCompile Include="university_simulation\university_structure\Student.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Student.cpp">
+    <ClCompile Include="university_simulation\university_structure\Subject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Simulation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Subject.cpp">
+    <ClCompile Include="university_simulation\university_structure\Task.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Knowledge.h">
+    <ClInclude Include="data_structures\Pair.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Task.h">
+    <ClInclude Include="university_simulation\Simulation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Student.h">
+    <ClInclude Include="university_simulation\university_structure\Student.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Simulation.h">
+    <ClInclude Include="university_simulation\university_structure\Subject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Subject.h">
+    <ClInclude Include="university_simulation\university_structure\Task.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
