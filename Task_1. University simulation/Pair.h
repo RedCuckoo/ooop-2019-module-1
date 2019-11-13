@@ -12,90 +12,91 @@
 
 /*!
 	\brief Customized Pair
-	\details A custom implementation of Pair<value_type,priority_type>, as it is used for queue with priority fields have the related names
-	Currently it is possible to create a Pair only through the provided constructor
+	\details A custom implementation of Pair<first, second>
+	It is possible to create a Pair only through the provided constructor
+	The following template classes MUST have operator<< working properly for a nice output.
 */
-template<class value_type, class priority_type = unsigned int>
+template<class first, class second>
 class Pair {
 private:
-	value_type value;
-	priority_type priority;
+	first first_element;
+	second second_element;
 
 	/*!
 	\brief Friended operator<<
 	\details Allows to output information with the stream
 	*/
-	template<class value_type, class priority_type>
-	friend std::ostream& operator<<(std::ostream& out, const Pair<value_type, priority_type>& to_out);
+	template<class first, class second>
+	friend std::ostream& operator<<(std::ostream& out, const Pair<first, second>& to_out);
 public:
 	/*!
 	\brief Constructor
 	\details Allowing a default constructor access
 	*/
 	Pair() = default;
-	Pair(value_type val, priority_type prior);
+	Pair(first first_elem, second second_elem);
 
-	value_type getVal() const;
-	void setVal(const value_type& val);
-	priority_type getPrior() const;
+	first getFirst() const;
+	second getSecond() const;
 
-	void setPrior(const value_type& pr);
-	bool operator>(const Pair<value_type, priority_type>& to_compare) const;
-	bool operator>=(const Pair<value_type, priority_type>& to_compare) const;
-	bool operator<(const Pair<value_type, priority_type>& to_compare) const;
-	bool operator<=(const Pair<value_type, priority_type>& to_compare) const;
-	bool operator==(const Pair<value_type, priority_type>& to_compare) const;
-	bool operator!=(const Pair<value_type, priority_type>& to_compare) const;
+	void setFirst(const first& first_elem);
+	void setSecond(const first& pr);
+	bool operator>(const Pair<first, second>& to_compare) const;
+	bool operator>=(const Pair<first, second>& to_compare) const;
+	bool operator<(const Pair<first, second>& to_compare) const;
+	bool operator<=(const Pair<first, second>& to_compare) const;
+	bool operator==(const Pair<first, second>& to_compare) const;
+	bool operator!=(const Pair<first, second>& to_compare) const;
 
 	void out();
 };
 
 /*!
 \brief Constructor
-\details A constructor to create a pair for the queue with priority
-\param[in] val The value which queue stores
-\param[in] prior The priority which provided value has
+\details A constructor to create a pair with first and second elements relatively
+\param[in] first_elem The first element that pair stores
+\param[in] second_elem The second element that pair stores
 */
-template<class value_type, class priority_type>
-Pair<value_type, priority_type>::Pair(value_type val, priority_type prior) {
-	value = val;
-	priority = prior;
+template<class first, class second>
+Pair<first, second>::Pair(first first_elem, second second_elem) {
+	first_element = first_elem;
+	second_element = second_elem;
 }
 
 /*!
-\brief Getter method for the value
-\details To get the value of the Pair
+\brief Getter method for the first_element
+\details To get the first_element of the Pair
 */
-template<class value_type, class priority_type>
-value_type Pair<value_type, priority_type>::getVal() const {
-	return value;
+template<class first, class second>
+first Pair<first, second>::getFirst() const {
+	return first_element;
 }
 
 /*!
-\brief Setter method for the value
-\details To set the value of the Pair
+\brief Setter method for the first_element
+\details To set the first_element of the Pair
 */
-template<class value_type, class priority_type>
-void Pair<value_type, priority_type>::setVal(const value_type& val) {
-	value = val;
+template<class first, class second>
+void Pair<first, second>::setFirst(const first& first_elem) {
+	first_element = first_elem;
 }
 
 /*!
-\brief Getter method for the priority
-\details To get the priority of the Pair
+\brief Getter method for the second_element
+\details To get the second_element of the Pair
 */
-template<class value_type, class priority_type>
-priority_type Pair<value_type, priority_type>::getPrior() const {
-	return priority;
+template<class first, class second>
+second Pair<first, second>::getSecond() const {
+	return second_element;
 }
 
 /*!
-\brief Setter method for the priority
-\details To set the priority of the Pair
+\brief Setter method for the second_element
+\details To set the second_element of the Pair
 */
-template<class value_type, class priority_type>
-void Pair<value_type, priority_type>::setPrior(const value_type& pr) {
-	priority = pr;
+template<class first, class second>
+void Pair<first, second>::setSecond(const first& pr) {
+	second_element = pr;
 }
 
 /*!
@@ -103,9 +104,9 @@ void Pair<value_type, priority_type>::setPrior(const value_type& pr) {
 \param to_compare Const reference to the Pair that has to be compared with the Pair passed as an lvalue
 \return True value if current Pair is bigger than to_compare and false value otherwise
 */
-template<class value_type, class priority_type>
-bool Pair<value_type, priority_type>::operator>(const Pair<value_type, priority_type>& to_compare) const {
-	return (priority > to_compare.getPrior()) ? true : false;
+template<class first, class second>
+bool Pair<first, second>::operator>(const Pair<first, second>& to_compare) const {
+	return (second_element > to_compare.getSecond()) ? true : false;
 }
 
 /*!
@@ -113,9 +114,9 @@ bool Pair<value_type, priority_type>::operator>(const Pair<value_type, priority_
 \param to_compare Const reference to the Pair that has to be compared with the Pair passed as an lvalue
 \return True value if current Pair is bigger or equal than to_compare and false value otherwise
 */
-template<class value_type, class priority_type>
-bool Pair<value_type, priority_type>::operator>=(const Pair<value_type, priority_type>& to_compare) const {
-	return (priority >= to_compare.getPrior()) ? true : false;
+template<class first, class second>
+bool Pair<first, second>::operator>=(const Pair<first, second>& to_compare) const {
+	return (second_element >= to_compare.getSecond()) ? true : false;
 }
 
 /*!
@@ -123,9 +124,9 @@ bool Pair<value_type, priority_type>::operator>=(const Pair<value_type, priority
 \param to_compare Const reference to the Pair that has to be compared with the Pair passed as an lvalue
 \return True value if current Pair is less than to_compare and false value otherwise
 */
-template<class value_type, class priority_type>
-bool Pair<value_type, priority_type>::operator<(const Pair& to_compare) const {
-	return (priority < to_compare.getPrior()) ? true : false;
+template<class first, class second>
+bool Pair<first, second>::operator<(const Pair& to_compare) const {
+	return (second_element < to_compare.getSecond()) ? true : false;
 }
 
 /*!
@@ -133,9 +134,9 @@ bool Pair<value_type, priority_type>::operator<(const Pair& to_compare) const {
 \param to_compare Const reference to the Pair that has to be compared with the Pair passed as an lvalue
 \return True value if current Pair is less or equal than to_compare and false value otherwise
 */
-template<class value_type, class priority_type>
-bool Pair<value_type, priority_type>::operator<=(const Pair<value_type, priority_type>& to_compare) const {
-	return (priority <= to_compare.getPrior()) ? true : false;
+template<class first, class second>
+bool Pair<first, second>::operator<=(const Pair<first, second>& to_compare) const {
+	return (second_element <= to_compare.getSecond()) ? true : false;
 }
 
 /*!
@@ -143,9 +144,9 @@ bool Pair<value_type, priority_type>::operator<=(const Pair<value_type, priority
 \param to_compare Const reference to the Pair that has to be compared with the Pair passed as an lvalue
 \return True value if they are equal and false value otherwise
 */
-template<class value_type, class priority_type>
-bool Pair<value_type, priority_type>::operator==(const Pair<value_type, priority_type>& to_compare) const {
-	return (priority == to_compare.getPrior() && value == to_compare.getVal()) ? true : false;
+template<class first, class second>
+bool Pair<first, second>::operator==(const Pair<first, second>& to_compare) const {
+	return (second_element == to_compare.getSecond() && first_element == to_compare.getFirst()) ? true : false;
 }
 
 /*!
@@ -153,19 +154,19 @@ bool Pair<value_type, priority_type>::operator==(const Pair<value_type, priority
 \param to_compare Const reference to the Pair that has to be compared with the Pair passed as an lvalue
 \return True value if they are unequal and false value otherwise
 */
-template<class value_type, class priority_type>
-bool Pair<value_type, priority_type>::operator!=(const Pair<value_type, priority_type>& to_compare) const {
-	return (priority != to_compare.getPrior() || value == to_compare.getVal()) ? true : false;
+template<class first, class second>
+bool Pair<first, second>::operator!=(const Pair<first, second>& to_compare) const {
+	return (second_element != to_compare.getSecond() || first_element == to_compare.getFirst()) ? true : false;
 }
 
 /*!
 \brief Output stored information
 \details Print stored fields of the Pair to the console, using <iostream> library
 */
-template<class value_type, class priority_type>
-void Pair<value_type, priority_type>::out() {
+template<class first, class second>
+void Pair<first, second>::out() {
 	if (this)
-		std::cout << value << " " << priority << std::endl;
+		std::cout << first_element << " " << second_element << std::endl;
 }
 
 //--------------------end-of-Pair-functions-implementation----------------------------
@@ -176,19 +177,11 @@ void Pair<value_type, priority_type>::out() {
 \param out Stream which is defined automatically, has to be ostream or inherited streams
 \param to_out This parameter is passed on the right of "<<", not changeble, the reference to the Pair that has to be outputted
 \return Reference to the ostream, to allow continous streaming, like
-	\code
-	Pair<int,int> a = {3,4};
-	Pair<int,int> b = {6,7};
-	std::cout << a << b;
-	//The output will be:
-	//3 4
-	//6 7
-	\endcode
 */
-template <class value_type, class priority_type>
-std::ostream& operator<<(std::ostream& out_stream, const Pair<value_type, priority_type>& to_out) {
-	if (to_out != Pair<value_type, priority_type>())
-		std::cout << to_out.value << " " << to_out.priority;// << std::endl;
+template <class first, class second>
+std::ostream& operator<<(std::ostream& out_stream, const Pair<first, second>& to_out) {
+	if (to_out != Pair<first, second>())
+		std::cout << to_out.first_element << " " << to_out.second_element;
 	return out_stream;
 }
 
