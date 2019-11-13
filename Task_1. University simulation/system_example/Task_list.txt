@@ -15,3 +15,71 @@ Write a program, which checks if graph is planar or not
 Find the definite integral, given in the book
 Find third derivative of the function
 Calculate the amount of way, the student can choose to do this module work
+Solve a differential equation
+Find degree of the vertex in the graph
+Build abstract computer
+Find area of the square
+Find volume of pyramid
+Find area of the triange
+Write a simple calculator using functional programming
+Find characteristic value
+Find roots of the polynomial
+Calculate the probability of rain in the sunny weather
+Refactore random stackOverFlow code
+Write an algorithm to come to the class on time
+Bring matrix to the 4th power
+Write a program, which checks if graph is planar or not
+Find the definite integral, given in the book
+Find third derivative of the function
+Calculate the amount of way, the student can choose to do this module work
+Solve a differential equation
+Find degree of the vertex in the graph
+Build abstract computer
+Find area of the square
+Find volume of pyramid
+Find area of the triange
+Write a simple calculator using functional programming
+Find characteristic value
+Find roots of the polynomial
+Calculate the probability of rain in the sunny weather
+Refactore random stackOverFlow code
+Write an algorithm to come to the class on time
+Bring matrix to the 4th power
+Write a program, which checks if graph is planar or not
+Find the definite integral, given in the book
+Find third derivative of the function
+Calculate the amount of way, the student can choose to do this module work
+Solve a differential equation
+Find degree of the vertex in the graph
+Build abstract computer
+Find area of the square
+Find volume of pyramid
+Find area of the triange
+Write a simple calculator using functional programming
+Find characteristic value
+Find roots of the polynomial
+Calculate the probability of rain in the sunny weather
+Refactore random stackOverFlow code
+Write an algorithm to come to the class on time
+Bring matrix to the 4th power
+Write a program, which checks if graph is planar or not
+Find the definite integral, given in the book
+Find third derivative of the function
+Calculate the amount of way, the student can choose to do this module work
+Solve a differential equation
+Find degree of the vertex in the graph
+Build abstract computer
+Find area of the square
+Find volume of pyramid
+Find area of the triange
+Write a simple calculator using functional programming
+Find characteristic value
+Find roots of the polynomial
+Calculate the probability of rain in the sunny weather
+Refactore random stackOverFlow code
+Write an algorithm to come to the class on time
+Bring matrix to the 4th power
+Write a program, which checks if graph is planar or not
+Find the definite integral, given in the book
+Find third derivative of the function
+Calculate the amount of way, the student can choose to do this module work

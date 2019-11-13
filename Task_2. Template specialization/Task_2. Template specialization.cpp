@@ -2,6 +2,7 @@
 #include <cmath>
 #include <utility>
 #include <string>
+#include <vector>
 
 template<class T>
 double f(T n) {
@@ -62,6 +63,11 @@ double f <char*>(char* s) {
 template <class T, class U>
 double f(std::pair<T, U> n) {
 	return pow(f(n.second), sin(523 * f(n.first)));
+}
+
+template <class T, class... Args>
+double f(T n, Args... args) {
+	//return f(n) + f(args...)
 }
 
 

@@ -96,6 +96,8 @@ Simulation::Simulation(const std::string& simulation_folder_name) {
 void Simulation::run(size_t given_time) {
 	for (size_t i = 0; i <= given_time; ++i, ++time) {
 		for (size_t j = 0, size = students.size(); j < size; ++j) {
+			if (!tasks.size())
+				return;
 			students[j].do_task(tasks);
 		}
 	}
@@ -112,7 +114,7 @@ std::vector<size_t> Simulation::generateImproved() {
 		current_students_knowledge = students[i].get_knowledge_list();
 		initial_students_knowledge = initial_students[i].get_knowledge_list();
 		for (size_t j = 0; j < size_of_knowledge; ++j) {
-			if (current_students_knowledge[j] < initial_students_knowledge[j]) {
+			if (initial_students_knowledge[j] < current_students_knowledge[j]) {
 				++counter;
 				//pair.push_back(current_students_knowledge[j].get_level() - initial_students_knowledge[j]);
 			}
@@ -120,6 +122,7 @@ std::vector<size_t> Simulation::generateImproved() {
 		pair.push_back(i);
 		pair.push_back(counter);
 		deltaAndCounter.push_back(pair);
+		pair.clear();
 		counter = 0;
 	}
 

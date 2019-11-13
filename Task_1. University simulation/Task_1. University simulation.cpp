@@ -5,11 +5,18 @@
 //K-29
 
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
 #include "Knowledge.h"
+#include "Student.h"
+#include "Simulation.h"
+#include <time.h>
 
 int main()
 {
-	Knowledge a("Discrete Mathematics", 4);
-	std::cout<<a++;
-	++a;
+	srand((size_t)time(0));
+	Simulation systemSimulation("system_example");
+	systemSimulation.run(100);
+	std::vector<size_t> improvedStudents = systemSimulation.generateImproved();
 }
