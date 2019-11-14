@@ -1,3 +1,10 @@
+/*!
+	\file
+	\brief Header file containing class Subject
+
+	This file contains definition of the class Subject, a part of a structure of university simulation
+*/
+
 #ifndef SUBJECT_H
 #define SUBJECT_H
 
@@ -5,6 +12,10 @@
 #include <vector>
 #include "Task.h"
 
+/*!
+	\brief Subject as a part of studying process
+	\details The class contains the vector of the related Tasks and the name of the Subject
+*/
 class Subject{
 private:
 	std::string name;

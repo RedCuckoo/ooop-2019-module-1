@@ -1,3 +1,10 @@
+/*!
+	\file
+	\brief Header file containing class Simulation
+
+	This file contains definition of a university simulation system
+*/
+
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
@@ -7,8 +14,11 @@
 #include "university_structure/Task.h"
 #include "university_structure/Subject.h"
 
-
-
+/*!
+	\brief Functions for simulation
+	\details A set of functions to be used for simulation.
+	The required files are included into the folder system_example
+*/
 class Simulation{
 private:
 	std::vector<Student> students;

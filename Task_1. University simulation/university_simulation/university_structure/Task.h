@@ -1,8 +1,10 @@
 /*!
 	\file
-	\brief Header file
-	\details Contains declaration of class Task in it
+	\brief Header file containing class Task
+
+	This file contains definition of the class Task, a part of a structure of university simulation
 */
+
 
 #ifndef TASK_H
 #define TASK_H
@@ -10,11 +12,13 @@
 #include <vector>
 #include <string>
 
+//forward declaration
 class Student;
 
 /*!
-	\brief Class Task
-	\details 
+	\brief Task as a part of studying process
+	\details The class contains the information about of the task.
+	Some of the information are provided in the constructor, the other one is dependent on the Student
 */
 class Task{
 private:
@@ -28,12 +32,10 @@ public:
 	Task(const Task& to_copy);
 	bool operator<(const Task& to_compare);
 	Task& operator--();
-	Task operator--(int);
 	bool operator==(const Task& to_compare) const;
 	size_t time_left();
 	size_t get_points();
-	void calculateTime(Student& to_calc, size_t stud_know);
-	//friend bool operator==(const Task& to_compare_f, const Task& to_compare_s);
+	void calculateTime(size_t stud_know);
 };
 
 #endif //TASK_H

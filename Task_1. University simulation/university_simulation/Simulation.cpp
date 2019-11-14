@@ -1,40 +1,34 @@
+/*!
+	\file
+	\brief C++ file with implementation of class Simulation
+*/
+
 #include "Simulation.h"
 #include <vector>
 #include <fstream>
 #include <algorithm>
 
-///*!
-//\brief To fill a container with random integers
-//\details The function changed passed container and filling it with random values.
-//\param [out] cont A reference to the container which has to be filled, it has to have a working function push(elem) for adding elements
-//\param [in] size An amount of elements to be pushed to the container
-//*/
-//std::vector<Knowledge> Simulation::fillRandKnowledge(size_t max_value) {
-//	std::vector<Knowledge> ans;
-//
-//	for (size_t i = 0, size = knowledges.size(); i < size; ++i)
-//		ans.push_back(knowledges[i]);
-//	
-//	for (size_t i = 0, size = knowledges.size(); i < size; ++i)
-//		ans[i] += (randInt(max_value) + 1);
-//	return ans;
-//}
-
 /*!
-\brief To get a random integer
-\details custom implemented randomizer for int
-\param [in] topVal The highest possible element for the value
-\param [in] negativeValue True if you would like to include negative values in the randomizer, false value otherwise
+	\brief To get a random integer
+	\details A custom implemented randomizer for int
+	\param [in] topVal The highest possible element for the value
+	\return Random integer number
 */
 size_t Simulation::randInt(size_t topVal) {
-	return (topVal == 1) ? (rand()%2) : (rand() % topVal);
+	return rand() % ++topVal;
 }
 
+/*!
+	\brief Get a subvector in the vector of tasks
+	\details Randomizer for getting a subvector from the stored in class Simulation vector of tasks.
+	It is used for filling tasks list for different Subject.
+	\return Subvector of tasks
+*/
 std::vector<Task> Simulation::getRandTaskSubVector() {
 	std::vector<Task> ans;
 	std::vector<Task> tasks_copy = tasks;
 
-	//array with numbers from 1 to baseVector.size()
+	//array with numbers from 1 to tasks.size()
 	std::vector<size_t> temp;
 	for (size_t i = 0, size = tasks.size(); i < size; ++i) {
 		temp.push_back(i);
@@ -45,13 +39,25 @@ std::vector<Task> Simulation::getRandTaskSubVector() {
 		ans.push_back(tasks_copy[temp[pos]]);
 		temp.erase(temp.begin() + pos);
 	}
+
 	return ans;
 }
 
+/*!
+	\brief Constructor for class Simulation
+	\details The construstor builds the system for the simulation from the provided folder.
+	The folder MUST contain three files required for a succesfull project simulation.
+	These files are: 
+		Student_list.txt (with lines that consist of family name and first name of different students, ID's are assigned automatically)
+		Subject_list.txt (with lines that consist of the name of the subject)
+		Task_list.txt (with lines that consist of the task description)
+	The maximum number of points for the Task varies from 0 to 100.
+	\param [in] simulation_folder_name The name of the folder which contains files for system simulation
+*/
 Simulation::Simulation(const std::string& simulation_folder_name) {
-	//TODO: explain numbers
 	std::string temp_string_1, temp_string_2;
 	std::ifstream input(simulation_folder_name + "/Task_list.txt");
+
 	while (input.good()) {
 		std::getline(input, temp_string_1);
 		tasks.push_back(Task(temp_string_1, randInt(100)));
@@ -60,10 +66,12 @@ Simulation::Simulation(const std::string& simulation_folder_name) {
 	input.close();
 
 	input.open(simulation_folder_name + "/Subject_list.txt");
+
 	while (input.good()) {
 		std::getline(input, temp_string_1);
 		subjects.push_back(Subject(temp_string_1, getRandTaskSubVector()));
 	}
+
 	input.close();
 
 	std::sort(tasks.begin(), tasks.end(),
@@ -85,6 +93,11 @@ Simulation::Simulation(const std::string& simulation_folder_name) {
 	initial_students = students;
 }
 
+/*!
+	\brief To run a simulation
+	\details Execute the simulation from the constructed object (loading occurs when a constructor is called)
+	\param [in] given_time The time in days for which the simulation will run
+*/
 void Simulation::run(size_t given_time) {
 	for (size_t i = 0; i <= given_time; ++i, ++time) {
 		for (size_t j = 0, size = students.size(); j < size; ++j) {
@@ -95,42 +108,35 @@ void Simulation::run(size_t given_time) {
 	}
 }
 
+/*!
+	\brief Generate a list of students who improved
+	\details The list is sorted in ascending order by deltas (difference of improvement)
+	\return The list of students in order from the greatest delta sum to the lowest
+*/
 std::vector<std::string> Simulation::generateImproved() {
-	std::vector<std::vector<size_t>> deltaAndCounter;
-	std::vector<size_t> pair;
-	size_t counter = 0;
-	size_t size_of_subjects = subjects.size();
-	std::vector<Pair<const Subject*, size_t>> current_students_knowledges;
+	//id and delta sum
+	std::vector<Pair<size_t, size_t>> deltaSumForStudents;
+	std::vector<Pair<const Subject*, size_t>> final_students_knowledges;
 	std::vector<Pair<const Subject*, size_t>> initial_students_knowledges;
-	for (size_t i = 0, size_of_students = students.size(); i < size_of_students; ++i) {
-		current_students_knowledges = students[i].get_knowledges_list();
+
+	for (size_t i = 0, size_of_students = students.size(), size_of_subj = subjects.size(); i < size_of_students; ++i) {
+		deltaSumForStudents.push_back(Pair<size_t, size_t>(i, 0));
+		final_students_knowledges = students[i].get_knowledges_list();
 		initial_students_knowledges = initial_students[i].get_knowledges_list();
-		for (size_t j = 0; j < size_of_subjects; ++j) {
-			if (initial_students_knowledges[j].second_element < current_students_knowledges[j].second_element) {
-				++counter;
-				//pair.push_back(current_students_knowledge[j].get_level() - initial_students_knowledge[j]);
-			}
+
+		for (size_t j = 0; j < size_of_subj; ++j) {
+			deltaSumForStudents[i].second_element += (final_students_knowledges[j].second_element - initial_students_knowledges[j].second_element);
 		}
-		pair.push_back(i);
-		pair.push_back(counter);
-		deltaAndCounter.push_back(pair);
-		pair.clear();
-		counter = 0;
 	}
 
-	std::sort(deltaAndCounter.begin(), deltaAndCounter.end(),
-		[](std::vector<size_t>& a, std::vector<size_t>& b) {
-			return (a[1] < b[1]);
+	std::sort(deltaSumForStudents.begin(), deltaSumForStudents.end(),
+		[](Pair<size_t, size_t> a, Pair<size_t, size_t> b) {
+			return b.second_element < a.second_element;
 		});
 
-	std::vector<size_t> ans_temp;
-	std::vector<std::string> ans;
-	for (size_t i = 0, size = deltaAndCounter.size(); i < size; ++i)
-		ans_temp.push_back(deltaAndCounter[i][0]);
+	std::vector<std::string> improved_students_list;
+	for (size_t i = 0, size = deltaSumForStudents.size(); i < size; ++i)
+		improved_students_list.push_back(students[deltaSumForStudents[i].first_element].getFullName());
 
-	for (size_t i = 0, size = ans_temp.size(); i < size; ++i)
-		ans.push_back(students[ans_temp[i]].getFullName());
-
-
-	return ans;
+	return improved_students_list;
 }
