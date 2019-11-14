@@ -1,8 +1,15 @@
+//Variant 23
+//Task 1
+//Simulation of university
+//Momotenko Yurii
+//K-29
+
 #include <iostream>
 #include <cmath>
 #include <utility>
 #include <string>
 #include <vector>
+#include <stdarg.h>
 
 template<class T>
 double f(T n) {
@@ -65,17 +72,20 @@ double f(std::pair<T, U> n) {
 	return pow(f(n.second), sin(523 * f(n.first)));
 }
 
-template <class T, class... Args>
-double f(T n, Args... args) {
-	//return f(n) + f(args...)
+template <class T>
+double f(std::vector<T> n) {
+	double max_val = cos((double)n[0] - 823.0);
+	double temp;
+
+	for (size_t i = 1, size = n.size(); i < size; ++i) {
+		temp = cos((double)n[i] - 823);
+		if (temp > max_val)
+			max_val = temp;
+	}
+
+	return max_val;
 }
 
-
-
-int main()
-{
-//	std::cout << f(-3.0);
-
-	std::cout << f(std::pair<std::string, int> (std::string(),3));
-
+int main(){
+	return 0;
 }
