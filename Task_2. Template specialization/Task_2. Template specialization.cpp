@@ -1,5 +1,5 @@
 //Variant 23
-//Task 1
+//Task 2
 //Simulation of university
 //Momotenko Yurii
 //K-29
