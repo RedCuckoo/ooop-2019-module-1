@@ -1,3 +1,9 @@
+//Variant 23
+//Task 3
+//Simulation of university
+//Momotenko Yurii
+//K-29
+
 #include <iostream>
 #include <list>
 
@@ -31,6 +37,7 @@ public:
 
 	void calc_S(int& s) {
 		s = s - N;
+		s = (2 * s) + N - 23;
 	}
 };
 
@@ -42,6 +49,7 @@ public:
 
 	void calc_S(int& s) {
 		s = s + (3 * N) + 23;
+		s = (2 * s) + N - 23;
 	}
 };
 
@@ -53,6 +61,8 @@ public:
 
 	void calc_S(int& s) {
 		s = s + (N / 2);
+		s = s - N;
+		s = (2 * s) + N - 23;
 	}
 };
 
@@ -64,6 +74,8 @@ public:
 
 	void calc_S(int& s) {
 		s = s - (N / 2) - 11;
+		s = s - N;
+		s = (2 * s) + N - 23;
 	}
 };
 
@@ -96,9 +108,5 @@ int main() {
 		std::cout << "Predicted value: " << predict(l_objects);
 	}
 
-
-
 	std::cout << "\nReal value: " << S;
-
-
 }
