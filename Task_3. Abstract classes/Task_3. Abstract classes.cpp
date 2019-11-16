@@ -6,6 +6,10 @@
 
 #include <iostream>
 #include <list>
+#include <utility>
+#include <vector>
+#include <fstream>
+
 
 int S = 0;
 
@@ -22,7 +26,7 @@ public:
 		S = (2 * S) + N - 23;
 	}
 
-	virtual void calc_S(int& s) = 0;
+	virtual void calc_S(int& s) const = 0;
 
 	std::shared_ptr<Base> b;
 };
@@ -35,7 +39,7 @@ public:
 		S = S - N;
 	}
 
-	void calc_S(int& s) {
+	void calc_S(int& s) const {
 		s = s - N;
 		s = (2 * s) + N - 23;
 	}
@@ -47,7 +51,7 @@ public:
 		S = S + (3 * N) + 23;
 	}
 
-	void calc_S(int& s) {
+	void calc_S(int& s) const {
 		s = s + (3 * N) + 23;
 		s = (2 * s) + N - 23;
 	}
@@ -59,7 +63,7 @@ public:
 		S = S + (N / 2);
 	}
 
-	void calc_S(int& s) {
+	void calc_S(int& s) const {
 		s = s + (N / 2);
 		s = s - N;
 		s = (2 * s) + N - 23;
@@ -72,41 +76,75 @@ public:
 		S = S - (N / 2) - 11;
 	}
 
-	void calc_S(int& s) {
+	void calc_S(int& s) const {
 		s = s - (N / 2) - 11;
 		s = s - N;
 		s = (2 * s) + N - 23;
 	}
 };
 
-int predict(const std::list<std::shared_ptr<Base>>& l_obj) {
+int predict(const std::list<const Base*>& l_obj) {
 	int s = 0;
-	//for (auto i = l_obj.begin(), e = l_obj.end(); i != e; ++i) {
-	for (const auto& i : l_obj) {
+
+	auto l_obj_copy = l_obj;
+	l_obj_copy.reverse();
+
+	//the last one will be left
+	for (auto i : l_obj_copy) {
 		i->calc_S(s);
 	}
+
 	return s;
+}
+
+void combinations(const std::vector<const Base*>& objects, std::vector<size_t>& indexes, std::vector<size_t> previous_indexes = std::vector<size_t>()) {
+	for (size_t i = 0, size = indexes.size(); i < size; ++i) {
+		previous_indexes.push_back(indexes[i]);
+
+		size_t temp = indexes[i];
+		indexes.erase(indexes.begin() + i);
+		
+		--size;
+		combinations(objects, indexes, previous_indexes);
+		if (size == 0) {
+			std::list<const Base*> new_list_to_predict;
+			for (size_t j = 0, f_size = previous_indexes.size(); j < f_size; ++j) 
+				new_list_to_predict.push_back(objects[previous_indexes[j]]);
+
+			std::cout << predict(new_list_to_predict);
+			std::cout << '\n';
+		}
+
+		++size;
+		indexes.insert(indexes.begin() + i, temp);
+		previous_indexes.erase(--previous_indexes.end());
+	}
 }
 
 int main() {
 	{
-		std::shared_ptr<Green> g1(new Green);
-		std::shared_ptr<Green> g2(new Green);
-		std::shared_ptr<Red> r1(new Red);
-		std::shared_ptr<Red> r2(new Red);
-		std::shared_ptr<Alpha> a1(new Alpha);
-		std::shared_ptr<Beta> b1(new Beta);
+		Green g1;
+		Green g2;
+		Red r1;
+		Red r2;
+		Alpha a1;
+		Beta b1;
 
-		std::list<std::shared_ptr<Base>> l_objects;
-		l_objects.push_back(b1);
-		l_objects.push_back(a1);
-		l_objects.push_back(r2);
-		l_objects.push_back(r1);
-		l_objects.push_back(g2);
-		l_objects.push_back(g1);
+		std::vector<const Base*> l_objects;
+		l_objects.push_back(&g1);
+		l_objects.push_back(&g2);
+		l_objects.push_back(&r1);
+		l_objects.push_back(&r2);
+		l_objects.push_back(&a1);
+		l_objects.push_back(&b1);
 
-		std::cout << "Predicted value: " << predict(l_objects);
+		std::vector<size_t> indexes;
+		for (size_t i = 0, size = l_objects.size(); i < size; ++i)
+			indexes.push_back(i);
+
+		std::cout << "Possible combinations are:\n";
+		combinations(l_objects, indexes);
 	}
 
-	std::cout << "\nReal value: " << S;
+	std::cout << "\nReal value: " << S << '\n';
 }
