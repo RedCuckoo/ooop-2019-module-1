@@ -43,7 +43,7 @@ private:
 	size_t do_topKnowledge();
 public:
 	Student(size_t students_identification, const std::string& students_family_name, const std::string& students_first_name, const std::vector<Subject>& subject_list, const std::vector<Task>& task_list);
-	void do_task();
+	bool do_task();
 	void updateKnowledge();
 	std::vector<Pair<const Subject*, size_t>> get_knowledges_list();
 	std::string getFullName();

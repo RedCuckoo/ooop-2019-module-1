@@ -116,7 +116,7 @@ void Student::updateKnowledge() {
 	\details This function keeps on track with global time.
 	If the student has a task, it changes time, otherwise it will pick up a new task also.
 */
-void Student::do_task() {
+bool Student::do_task() {
 	if (!hasTask) {
 		size_t pos;
 		if (strategy_type == 1) {
@@ -165,9 +165,12 @@ void Student::do_task() {
 			//if time is over
 			hasTask = false;
 			updateKnowledge();
+			++time;
+			return true;
 		}
 	}
 	++time;
+	return false;
 }
 
 /*!

@@ -17,21 +17,8 @@
 int main()
 {
 	srand((size_t)time(0));
-
-	//example on how to use the class Simulation
-	Simulation systemSimulation("system_example");
-
-	std::cout << "Please, enter the amount of days the program has to simulate: ";
-	size_t days;
-	std::cin >> days;
-	std::cout << '\n';
-
-	systemSimulation.run(days);
-	
-	std::vector<std::string> improvedStudents = systemSimulation.generateImproved();
-	
-	for (size_t i = 0, size = improvedStudents.size(); i < size; ++i)
-		std::cout << improvedStudents[i] << '\n';
+	Simulation simulation_example("system_example");
+	simulation_example.run();
 
 	return 0;
 }

@@ -98,14 +98,52 @@ Simulation::Simulation(const std::string& simulation_folder_name) {
 	\details Execute the simulation from the constructed object (loading occurs when a constructor is called)
 	\param [in] given_time The time in days for which the simulation will run
 */
-void Simulation::run(size_t given_time) {
+void Simulation::run_time(size_t given_time) {
+	size_t tasks_counter = 0;
 	for (size_t i = 0; i <= given_time; ++i, ++time) {
 		for (size_t j = 0, size = students.size(); j < size; ++j) {
 			if (!tasks.size())
 				return;
-			students[j].do_task();
+			if (students[j].do_task())
+				++tasks_counter;
 		}
 	}
+	std::cout << "During " << given_time << " days students completed " << tasks_counter << " tasks.\n\n";
+}
+
+/*!
+	\brief To run a simulation
+	\details Execute the simulation from the constructed object (loading occurs when a constructor is called)
+	\param [in] given_tasks The amount of tasks students have to finish in order to complete the simulation
+*/
+void Simulation::run_tasks(size_t given_amount) {
+	size_t i = 0;
+	size_t stds_size = students.size();
+	size_t tsks_size = given_amount;
+	if (!stds_size)
+		return;
+
+	if (tsks_size > (stds_size * tasks.size())) {
+		std::cout << "Unable to run, students don't have enough tasks to do\n\n";
+		return;
+	}
+	
+	size_t time_counter = 0;
+
+	while (tsks_size) {
+		if (students[i].do_task())
+			--tsks_size;
+
+		++time_counter;
+
+		
+		if (i + 1 == stds_size)
+			i = 0;
+		else
+			++i;
+	}
+
+	std::cout << "During " << time_counter << " days students completed " <<given_amount << " tasks.\n\n";
 }
 
 /*!
@@ -139,4 +177,37 @@ std::vector<std::string> Simulation::generateImproved() {
 		improved_students_list.push_back(students[deltaSumForStudents[i].first_element].getFullName());
 
 	return improved_students_list;
+}
+
+void Simulation::run() {
+	size_t choice = 0;
+	while (choice != 1 && choice != 2) {
+		std::cout << "Please choose the endpoint of the simulation:\n";
+		std::cout << "1 - amount of days the simulation will run\n";
+		std::cout << "2 - amount of tasks students have to complete\n=> ";
+		std::cin >> choice;
+	}
+	
+	if (choice == 1) {
+		std::cout << "Please, enter the amount of days the program has to simulate: ";
+		size_t days;
+		std::cin >> days;
+		std::cout << '\n';
+
+		run_time(days);
+	}
+	else {
+		std::cout << "Please, enter the amount of tasks the students have to complete: ";
+		size_t tasks;
+		std::cin >> tasks;
+		std::cout << '\n';
+
+		run_tasks(tasks);
+	}
+
+	std::cout << "The list of approved students sorted in ascending order by deltas (differences of improvement):\n";
+	std::vector<std::string> improvedStudents = generateImproved();
+
+	for (size_t i = 0, size = improvedStudents.size(); i < size; ++i)
+		std::cout << improvedStudents[i] << '\n';
 }
