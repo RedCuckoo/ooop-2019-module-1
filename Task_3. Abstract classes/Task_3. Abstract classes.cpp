@@ -130,7 +130,15 @@ int main() {
 		Alpha a1;
 		Beta b1;
 
-		std::vector<const Base*> l_objects;
+		std::vector<const Base*> v_objects;
+		std::list<const Base*> l_objects;
+		v_objects.push_back(&g1);
+		v_objects.push_back(&g2);
+		v_objects.push_back(&r1);
+		v_objects.push_back(&r2);
+		v_objects.push_back(&a1);
+		v_objects.push_back(&b1);
+
 		l_objects.push_back(&g1);
 		l_objects.push_back(&g2);
 		l_objects.push_back(&r1);
@@ -142,8 +150,10 @@ int main() {
 		for (size_t i = 0, size = l_objects.size(); i < size; ++i)
 			indexes.push_back(i);
 
+
 		std::cout << "Possible combinations are:\n";
-		combinations(l_objects, indexes);
+		combinations(v_objects, indexes);
+		std::cout << "\nPredicted value of current set: " << predict(l_objects) << "\n";
 	}
 
 	std::cout << "\nReal value: " << S << '\n';
